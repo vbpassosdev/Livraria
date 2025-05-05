@@ -27,3 +27,17 @@ COPY --from=build /out .
 
 # Define o comando para iniciar a aplicação
 ENTRYPOINT ["dotnet", "Livraria.dll"]
+# Etapa de build
+FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
+WORKDIR /src
+
+COPY . .
+
+RUN dotnet restore "API_Livraria.csproj"
+RUN dotnet publish "API_Livraria.csproj" -c Release -o /app/publish
+
+# Etapa de runtime
+FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS final
+WORKDIR /app
+COPY --from=build /app/publish .
+ENTRYPOINT ["dotnet", "API_Livraria.dll"]
