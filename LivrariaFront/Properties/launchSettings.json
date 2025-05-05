@@ -1,0 +1,15 @@
+{
+    "ApiSettings": {
+        "BaseUrl": "https://livraria-rghy.onrender.com"
+    },
+    "profiles": {
+        "LivrariaFront": {
+            "commandName": "Project",
+            "launchBrowser": true,
+            "environmentVariables": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            },
+            "applicationUrl": "https://localhost:51524;http://localhost:51525"
+        }
+    }
+}

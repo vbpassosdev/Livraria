@@ -5,17 +5,27 @@
     namespace LivrariaApi.Controllers;
 
     [ApiController]
+
+
+    [Route("/")]
+    public class HomeController : ControllerBase
+    {
+        [HttpGet]
+        public IActionResult Get() => Ok("API da Livraria Online está ativa");
+    }
+
+
     [Route("api/[controller]")]
-    public class LivrosControllers : ControllerBase
+    public class LivrosController : ControllerBase
     {
         private readonly LivroService _service;
 
-        public LivrosControllers(LivroService service)
+        public LivrosController(LivroService service)
         {
             _service = service;
         }
 
-        [HttpGet]
+    [HttpGet]
         public ActionResult<List<Livro>> Get() => _service.ObterTodos();
 
         [HttpGet("{id}")]

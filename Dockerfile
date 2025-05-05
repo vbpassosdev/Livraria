@@ -8,7 +8,7 @@ WORKDIR /src/Livraria
 RUN dotnet publish -c Release -o /app/publish
 
 # Etapa final
-FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS final
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS final
 WORKDIR /app
 COPY --from=build /app/publish .
 ENTRYPOINT ["dotnet", "API_Livraria.dll"]
