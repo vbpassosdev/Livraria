@@ -12,7 +12,7 @@ COPY Livraria/. .
 RUN dotnet publish "API_Livraria.csproj" -c Release -o /app/publish
 
 # Etapa de runtime
-FROM mcr.microsoft.com/dotnet/aspnet:6.2.2 AS final
+FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS final
 WORKDIR /app
 COPY --from=build /app/publish .
 ENTRYPOINT ["dotnet", "API_Livraria.dll"]
