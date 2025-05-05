@@ -1,4 +1,5 @@
 # Etapa de construção
+
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 
 # Definindo o diretório de trabalho para /app
