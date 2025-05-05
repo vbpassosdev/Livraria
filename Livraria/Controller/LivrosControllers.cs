@@ -2,8 +2,6 @@
     using Microsoft.AspNetCore.Mvc;
     using LivrariaApi.Models;
     using LivrariaApi.Services;
-    using global::LivrariaApi.Models;
-    using global::LivrariaApi.Services;
 
     namespace LivrariaApi.Controllers;
 
