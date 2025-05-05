@@ -11,7 +11,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
+    <EditorConfigFiles Remove="C:\Sistemas\csharp\source\repos\Livraria\Livraria\.editorconfig" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="C:\Sistemas\csharp\source\repos\Livraria\Livraria\.editorconfig" />
   </ItemGroup>
 
 </Project>
