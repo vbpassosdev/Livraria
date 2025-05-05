@@ -1,7 +1,4 @@
-﻿   using global::LivrariaApi.Models;
-    using System.Xml.Linq;
-    using LivrariaApi.Models;
-
+﻿
     namespace LivrariaApi.Services;
 
     public class LivroService

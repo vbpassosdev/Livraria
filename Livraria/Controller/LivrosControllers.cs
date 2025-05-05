@@ -1,6 +1,5 @@
 ﻿
     using Microsoft.AspNetCore.Mvc;
-    using LivrariaApi.Models;
     using LivrariaApi.Services;
 
     namespace LivrariaApi.Controllers;

@@ -1,4 +1,4 @@
-namespace LivrariaApi.Models;
+
 
 public enum GeneroLivro
 {
@@ -15,8 +15,8 @@ public enum GeneroLivro
 public class Livro
 {
     public int Id { get; set; }
-    public string Titulo { get; set; }
-    public string Autor { get; set; }
+    public string Titulo { get; set; } = string.Empty;
+    public string Autor { get; set; } = string.Empty;
     public GeneroLivro Genero { get; set; }
     public decimal Preco { get; set; }
     public int QuantidadeEstoque { get; set; }
