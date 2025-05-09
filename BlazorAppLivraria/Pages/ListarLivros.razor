@@ -1,0 +1,54 @@
+﻿@page "/weather"
+@inject HttpClient Http
+
+<PageTitle>Listar Livros</PageTitle>
+
+<h1>Livros</h1>
+
+<p>Este componente exibe uma lista de livros</p>
+
+@if (forecasts == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Titulo</th>
+                <th>Autor</th>
+                <th>Genero</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var forecast in forecasts)
+            {
+                <tr>
+                    <td>@forecast.Titulo</td>
+                    <td>@forecast.Autor</td>
+                    <td>@forecast.Genero</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private LivrosForecast[]? forecasts;
+
+    protected override async Task OnInitializedAsync()
+    {
+        forecasts = await Http.GetFromJsonAsync<LivrosForecast[]>("sample-data/weather.json");
+    }
+
+    public class LivrosForecast
+    {
+        public int Id { get; set; }
+        public string Titulo { get; set; } = string.Empty;
+        public string Autor { get; set; } = string.Empty;
+        public GeneroLivro Genero { get; set; }
+        public decimal Preco { get; set; }
+        public int QuantidadeEstoque { get; set; }
+    }
+}

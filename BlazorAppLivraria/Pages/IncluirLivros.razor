@@ -1,0 +1,101 @@
+﻿@using System.ComponentModel.DataAnnotations
+
+@page "/livros"
+@inject HttpClient Http
+
+
+<PageTitle>Inclusão de Livros</PageTitle>
+
+<h3>Cadastro de Livros</h3>
+
+<EditForm Model="livro" OnValidSubmit="SalvarLivro">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div class="mb-3">
+        <label>Título:</label>
+        <InputText class="form-control" @bind-Value="livro.Titulo" />
+    </div>
+
+    <div class="mb-3">
+        <label>Autor:</label>
+        <InputText class="form-control" @bind-Value="livro.Autor" />
+    </div>
+
+    <InputSelect class="form-control" @bind-Value="livro.Genero">
+        @foreach (GeneroLivro genero in Enum.GetValues(typeof(GeneroLivro)))
+        {
+            <option value="@((int)genero)">@ObterNomeGenero(genero)</option>
+        }
+    </InputSelect>
+
+
+
+    <div class="mb-3">
+        <label>Preço:</label>
+        <InputNumber class="form-control" @bind-Value="livro.Preco" />
+    </div>
+
+    <div class="mb-3">
+        <label>Quantidade em Estoque:</label>
+        <InputNumber class="form-control" @bind-Value="livro.QuantidadeEstoque" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Aplicar</button>
+</EditForm>
+
+@if (mensagemSucesso != null)
+{
+    <div class="alert alert-success mt-3">@mensagemSucesso</div>
+}
+
+@code {
+    private string ObterNomeGenero(GeneroLivro genero)
+    {
+        var field = genero.GetType().GetField(genero.ToString());
+        var attr = field?.GetCustomAttributes(typeof(DisplayAttribute), false)
+                         .FirstOrDefault() as DisplayAttribute;
+        return attr?.Name ?? genero.ToString();
+    }
+
+   private Livro livro = new();
+    private string? mensagemSucesso;
+
+
+    private async Task SalvarLivro()
+    {
+        // Use a URL completa da API hospedada no 
+        livro.Id = 1;
+
+        var response = await Http.PostAsJsonAsync("https://livraria-rghy.onrender.com/api/Livros", livro);
+
+        if (response.IsSuccessStatusCode)
+        {
+            mensagemSucesso = "Livro cadastrado com sucesso!";
+            livro = new(); // limpa o formulário
+        }
+        else
+        {
+            mensagemSucesso = $"Erro ao cadastrar livro: {response.StatusCode}";
+        }
+    }
+
+
+    public enum GeneroLivro
+    {
+        [Display(Name = "Romance")]
+        Romance,
+
+        [Display(Name = "Ficção")]
+        Ficcao,
+
+        [Display(Name = "Fantasia")]
+        Fantasia,
+
+        [Display(Name = "Suspense")]
+        Suspense,
+
+        [Display(Name = "Biografia")]
+        Biografia
+    }
+}

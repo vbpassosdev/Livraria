@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+using LivrariaFront.Models;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -14,9 +15,8 @@ public class LivrariaService
 
     public async Task<List<Livro>> GetLivrosAsync()
     {
-        var response = await _httpClient.GetAsync("/livros");
+        var response = await _httpClient.GetAsync("api/livros");
         response.EnsureSuccessStatusCode();
-
         var json = await response.Content.ReadAsStringAsync();
         return JsonSerializer.Deserialize<List<Livro>>(json, new JsonSerializerOptions
         {
