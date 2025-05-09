@@ -13,4 +13,5 @@ builder.Services.AddScoped(sp => new HttpClient
     BaseAddress = new Uri("https://livraria-rghy.onrender.com/")
 });
 
+
 await builder.Build().RunAsync();
