@@ -9,7 +9,7 @@
             "environmentVariables": {
                 "ASPNETCORE_ENVIRONMENT": "Development"
             },
-            "applicationUrl": "https://localhost:51524;http://localhost:51525"
+            "applicationUrl": "https://livraria-rghy.onrender.com"
         }
     }
 }

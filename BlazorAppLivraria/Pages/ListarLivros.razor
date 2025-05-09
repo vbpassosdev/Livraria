@@ -1,0 +1,57 @@
+﻿@page "/listarlivros"
+@inject HttpClient Http
+
+<PageTitle>Listar Livros</PageTitle>
+
+<h1>Livros</h1>
+<p>Este componente exibe uma lista de livros da API.</p>
+
+@if (livros == null)
+{
+    <p><em>Carregando...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Título</th>
+                <th>Autor</th>
+                <th>Gênero</th>
+                <th>Preço</th>
+                <th>Estoque</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var livro in livros)
+            {
+                <tr>
+                    <td>@livro.Titulo</td>
+                    <td>@livro.Autor</td>
+                    <td>@livro.Genero</td>
+                    <td>@livro.Preco.ToString("C")</td>
+                    <td>@livro.QuantidadeEstoque</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private Livro[]? livros;
+
+    protected override async Task OnInitializedAsync()
+    {
+        livros = await Http.GetFromJsonAsync<Livro[]>("https://livraria-rghy.onrender.com/api/livros");
+    }
+
+    public class Livro
+    {
+        public int Id { get; set; }
+        public string Titulo { get; set; } = string.Empty;
+        public string Autor { get; set; } = string.Empty;
+        public string Genero { get; set; } = string.Empty;
+        public decimal Preco { get; set; }
+        public int QuantidadeEstoque { get; set; }
+    }
+}
