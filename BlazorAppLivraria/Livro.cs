@@ -5,14 +5,14 @@
 
     public enum GeneroLivro
     {
-        Ficcao = 1 ,
-        Romance = 2,
-        Misterio = 3,
-        Fantasia = 4,
-        Biografia = 5,
-        Ciencia = 6,
-        Historia = 7 ,
-        Outro = 8
+        Ficcao = 0 ,
+        Romance = 1,
+        Misterio = 2,
+        Fantasia = 3,
+        Biografia = 4,
+        Ciencia = 5,
+        Historia = 6 ,
+        Outro = 7
     }
 
     public class Livro
