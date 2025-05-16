@@ -4,28 +4,35 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Serviços
 builder.Services.AddSingleton<LivroService>();
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+// CORS - apenas uma vez
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("PermitirTudo", policy =>
+    options.AddPolicy("AllowBlazorFrontend", policy =>
     {
-        policy.AllowAnyOrigin()
+        policy.WithOrigins("https://applivrariablazorweb.onrender.com")
               .AllowAnyHeader()
               .AllowAnyMethod();
     });
 });
 
+// Banco de dados
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 var app = builder.Build();
 
+// Middleware
 app.UseSwagger();
 app.UseSwaggerUI();
-app.UseCors("PermitirTudo"); 
+
+// Use CORS com a política correta
+app.UseCors("AllowBlazorFrontend");
+
 app.MapControllers();
 app.Run();
